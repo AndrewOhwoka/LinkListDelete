@@ -1,12 +1,16 @@
-import org.w3c.dom.Node;
-
 public class LinkedList {
     public Node head;
     public Node tail;
     public int size;
 
-    //Create a linked List
-    public Node createLinkedList(int nodeValue){
+    // Node class definition
+    public class Node {
+        public int value;
+        public Node next;
+    }
+
+    // Create a linked list
+    public Node createLinkedList(int nodeValue) {
         head = new Node();
         Node node = new Node();
         node.next = null;
@@ -17,16 +21,15 @@ public class LinkedList {
         return head;
     }
 
-    //Insert into a linked list
-    //0. if linked list doesn't exist then create it
-    //1. Inserting at the begining
-    //2. Inserting at the ending
-    //3. Insert anywhere in the LL
-
-    public void insertInLinkedList(int nodeValue, int location){
+    // Insert into a linked list
+    // 0. if linked list doesn't exist then create it
+    // 1. Inserting at the beginning
+    // 2. Inserting at the end
+    // 3. Insert anywhere in the LL
+    public void insertInLinkedList(int nodeValue, int location) {
         Node node = new Node();
         node.value = nodeValue;
-        if (head == null){
+        if (head == null) {
             createLinkedList(nodeValue);
             return;
         } else if (location == 0) {
@@ -43,21 +46,21 @@ public class LinkedList {
                 tempNode = tempNode.next;
                 index++;
             }
-            Node nextNode = node;
+            Node nextNode = tempNode.next;
+            tempNode.next = node;
             node.next = nextNode;
         }
         size++;
-
     }
 
-    public void traverseLinkedList(){
+    public void traverseLinkedList() {
         if (head == null) {
             System.out.println("SLL does not exist");
         } else {
             Node tempNode = head;
-            for (int i = 0; i < size; i++){
+            for (int i = 0; i < size; i++) {
                 System.out.print(tempNode.value);
-                if ( i != size -1) {
+                if (i != size - 1) {
                     System.out.print(" -> ");
                 }
                 tempNode = tempNode.next;
@@ -66,18 +69,18 @@ public class LinkedList {
         System.out.println("\n");
     }
 
-    public void searchNode (int nodeValue){
-        if (head != null){
+    public void searchNode(int nodeValue) {
+        if (head != null) {
             Node tempNode = head;
-            for (int i = 0; i < size; i++){
+            for (int i = 0; i < size; i++) {
                 if (tempNode.value == nodeValue) {
-                    System.out.println( "Found the node at location: " + i + "\n");
+                    System.out.println("Found the node at location: " + i + "\n");
+                    return;
                 }
                 tempNode = tempNode.next;
             }
             System.out.println("Node not found");
         }
-
     }
 
     public void deleteNode(int location) {
@@ -114,5 +117,4 @@ public class LinkedList {
         currentNode.next = currentNode.next.next; // Skip the node to delete
         size--;
     }
-
 }
